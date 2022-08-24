@@ -1,0 +1,46 @@
+---
+title: "Untitled"
+author: "Tao"
+date: "8/23/2022"
+output: html_document
+---
+
+```{r}
+#install.packages("textreadr")
+library("textreadr")
+library(rgdal)  
+
+library (raster)
+```
+
+
+```{r}
+setwd("C:/Users/taohuang/Downloads")
+file="Peak_10644_GPS_Track_coordinates.docx"
+gps<-read_docx(file, skip = 4, remove.empty = TRUE)
+gps
+write.csv(data.frame(gps),file="Peak_10644_GPS_Track_coordinates.csv" , row.names=F
+          
+          )
+```
+
+```{r}
+setwd("C:/Users/taohuang/Downloads")
+lat_lon<-read.csv("Peak_10644_GPS_Track_coordinates_1.csv",header = F)
+lat_lon$lat<-lat_lon$V1 +lat_lon$V2 /60+lat_lon$V3 /3600
+lat_lon$lon<-(-1)*(lat_lon$V4 +lat_lon$V5 /60+lat_lon$V6 /3600)
+lat_lon
+write.csv(lat_lon,file="lat_lon.csv")
+```
+
+```{r}
+# first, convert the data.frame to spdf
+#spdf <- SpatialPointsDataFrame( lat_lon[,c("lat","lon")],lat_lon)
+#spdf
+#crs(spdf) <- "+init=epsg:4226"
+        #plot(spdf
+            #         )
+#          writeOGR(obj=spdf, dsn="C:/Users/taohuang/Downloads/spdf", layer="spdf", driver="ESRI Shapefile") 
+          
+          
+```
